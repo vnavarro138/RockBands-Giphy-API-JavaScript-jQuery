@@ -25,7 +25,7 @@ var APIKey = "dc6zaTOxFJmzC";
         $("#band-view").empty();   
         for (var i = 0; i < topics.length; i++) {
           var a = $("<button>");
-          // Adding a class
+          // Adding a class to button
           a.addClass("band");
           // Adding a data-attribute with a value of the band at index i
           a.attr("data-name", topics[i]);
@@ -77,7 +77,7 @@ var APIKey = "dc6zaTOxFJmzC";
             // Only taking action if the photo has an appropriate rating
             if (response.data[i].rating !== "r" && response.data[i].rating !== "pg-13") {
               // Creating a div with the class "item", therefore does not need to be in html
-              var gifDiv = $("<div class='item'>");
+              var gifDiv = $("<div>");
 
               // DONE: Storing the result item's rating
               var rating = response.data[i].rating;
@@ -85,8 +85,8 @@ var APIKey = "dc6zaTOxFJmzC";
               // DONE: Creating a paragraph tag with the result item's rating
               var p = $("<p>").text("Rating: " + rating);
 
-              // Creating an image tag
-              var bandImage = $("<img>");
+              // Creating an image tag with class item
+              var bandImage = $("<img class='item'>");
 
               // Giving the image tag an src attribute of a proprty pulled off the
               // result item. setting the source = to results[i].images.original.url. 

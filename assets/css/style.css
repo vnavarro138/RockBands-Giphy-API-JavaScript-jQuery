@@ -1,3 +1,47 @@
 button, div, form, input {
 	margin: 10px;
 }
+body {
+background-image: url("../images/graf.jpg");
+background-size: cover;
+}
+label {
+	font-size: 36px;
+	color: #FF00FF;
+	font-family: 'Permanent Marker', cursive;
+
+}
+#add-band {
+	width: 140px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+	font-family: 'Syncopate', sans-serif;
+    font-size: 20px;
+    color: #8B008B;
+}
+
+button {
+	width: auto;
+    padding: 12px 20px;
+    margin: 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Nosifer', cursive;
+    font-size: 24px;
+}
+
+#band-input {
+	width: 200px;
+	height: 30px;
+}
+p {
+	font-family: 'Sigmar One', cursive;
+	font-size: 16px;
+	color: black;
+}
