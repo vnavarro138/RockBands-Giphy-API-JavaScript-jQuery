@@ -89,8 +89,16 @@ var APIKey = "dc6zaTOxFJmzC";
               var bandImage = $("<img>");
 
               // Giving the image tag an src attribute of a proprty pulled off the
-              // result item
-              bandImage.attr("src", results[i].images.original.url);
+              // result item. setting the source = to results[i].images.original.url. 
+              //the source is the master, it's what displays when the page is loaded
+              //we want it to be still to start, and animate when clicked
+              bandImage.attr("src", results[i].images.original_still.url);
+              //set data-animate = to source
+              bandImage.attr("data-animate", results[i].images.original.url);
+              //from giphy developer doucmentation, we can use the console window or the website for this 
+              bandImage.attr("data-still", results[i].images.original_still.url);
+              bandImage.attr("data-state", "still");
+
               console.log(results[i].images.original.url);
               // Appending the paragraph and personImage we created to the "gifDiv" div we created
               gifDiv.append(p);
@@ -104,8 +112,10 @@ var APIKey = "dc6zaTOxFJmzC";
     });
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //TO DO: when still gif is clicked, gif with class = "item" should toggle between a still to animate
-    $(".item").on("click", function() {
-      // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+//can't use .on click for dynamically added objects (ie. the gifs came )
+    //$(".item").on("click", function() {
+      $('body').on('click', '.item', function() {
+            // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
       var state = $(this).attr("data-state");
       // If the clicked image's state is still, update its src attribute to what its data-animate value is.
       // Then, set the image's data-state to animate
