@@ -51,7 +51,9 @@ var APIKey = "dc6zaTOxFJmzC";
 
 //TO DO: place giphys on page
     // Event listener for all button elements
-    $("button").on("click", function() {
+    //event handler isnt running once render buttons is ran
+
+    $(document).on("click", ".band", function() {
       // In this case, the "this" keyword refers to the button that was clicked
       var band = $(this).attr("data-name");
 
@@ -88,7 +90,7 @@ var APIKey = "dc6zaTOxFJmzC";
               // Creating an image tag with class item
               var bandImage = $("<img class='item'>");
 
-              // Giving the image tag an src attribute of a proprty pulled off the
+              // Giving the image tag an src attribute of a proprty pulled off the giphy website: https://developers.giphy.com/docs/
               // result item. setting the source = to results[i].images.original.url. 
               //the source is the master, it's what displays when the page is loaded
               //we want it to be still to start, and animate when clicked
@@ -110,10 +112,10 @@ var APIKey = "dc6zaTOxFJmzC";
           }
         });
     });
-///////////////////////////////////////////////////////////////////////////////////////////////
 //TO DO: when still gif is clicked, gif with class = "item" should toggle between a still to animate
 //can't use .on click for dynamically added objects (ie. the gifs came )
     //$(".item").on("click", function() {
+
       $('body').on('click', '.item', function() {
             // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
       var state = $(this).attr("data-state");
@@ -128,6 +130,5 @@ var APIKey = "dc6zaTOxFJmzC";
         $(this).attr("data-state", "still");
       }
     });
-
-
-////////////////////////////////////////////////////////////////////
+      //?put display info in a funtion, then 
+     // $(document).on('click', '.gif', call funtion)
