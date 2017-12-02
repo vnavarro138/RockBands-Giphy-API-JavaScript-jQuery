@@ -15,9 +15,11 @@
 //////////////////////////////////////////////////////////////////////
 //DONE: Create an array of strings, with 10 bands
 //DONE: save the array with 10 bands as a variable called topics
-var topics = ["Linkin Park", "Incubus", "Smashing Pumpkins", "Taking Back Sunday", "Thursday", "Deftones", "Rob Zombie", "Slipknot", "Disturbed", "Blink 182"];
-//TO DO: take the topics in the array and create buttons in html
-//TO DO: create a loop that appends a button for each string in the array
+var topics = ["Linkin Park", "Incubus", "Smashing Pumpkins", "Taking Back Sunday", "Guns n Roses", "Deftones", "Rob Zombie", "Slipknot", "Disturbed", "Blink 182"];
+//public API beta key
+var APIKey = "dc6zaTOxFJmzC";
+//DONE: take the topics in the array and create buttons in html
+//DONE: create a loop that appends a button for each string in the array
        function renderButtons() {   
 //DONE: Empties band-view div so that the buttons don't get repeated every time you add a band button
         $("#band-view").empty();   
@@ -33,13 +35,8 @@ var topics = ["Linkin Park", "Incubus", "Smashing Pumpkins", "Taking Back Sunday
           $("#band-view").append(a);
         }
       }
-//TO DO: when users clicks on a band button (create click function)
 
-//TO DO: grab 10 static gif images from giphy api
-//TO DO: place images on page
-//TO DO: when still gif is clicked, gif should animate
-//TO DO: when gif is clicked again, gif should stop playing
-//TO DO: display rating under each gif
+
 //TO DO: add a form to page
       $("#add-band").on("click", function(event) {
       	event.preventDefault();
@@ -49,5 +46,78 @@ var topics = ["Linkin Park", "Incubus", "Smashing Pumpkins", "Taking Back Sunday
         renderButtons();
       });
 // Calling the renderButtons function at least once to display the initial list of movies
+//DONE: make a function that remakes the buttons on the page for all topics in topics array
       renderButtons();
-//TO DO: make a function that remakes the buttons on the page for all topics in topics array
+
+//TO DO: place giphys on page
+    // Event listener for all button elements
+    $("button").on("click", function() {
+      // In this case, the "this" keyword refers to the button that was clicked
+      var band = $(this).attr("data-name");
+
+      // Constructing a URL to search Giphy for the name of the person who said the quote
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        band + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+      // Performing our AJAX GET request
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+        })
+        // After the data comes back from the API
+        .done(function(response) {
+        	console.log(response);
+        	console.log(response.data[0].rating)
+          // Storing an array of results in the results variable
+          var results = response.data;
+
+          // Looping over every result item
+          for (var i = 0; i < results.length; i++) {
+
+            // Only taking action if the photo has an appropriate rating
+            if (response.data[i].rating !== "r" && response.data[i].rating !== "pg-13") {
+              // Creating a div with the class "item", therefore does not need to be in html
+              var gifDiv = $("<div class='item'>");
+
+              // DONE: Storing the result item's rating
+              var rating = response.data[i].rating;
+
+              // DONE: Creating a paragraph tag with the result item's rating
+              var p = $("<p>").text("Rating: " + rating);
+
+              // Creating an image tag
+              var bandImage = $("<img>");
+
+              // Giving the image tag an src attribute of a proprty pulled off the
+              // result item
+              bandImage.attr("src", results[i].images.original.url);
+              console.log(results[i].images.original.url);
+              // Appending the paragraph and personImage we created to the "gifDiv" div we created
+              gifDiv.append(p);
+              gifDiv.append(bandImage);
+
+              // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
+              $("#bandsgifs-appear-here").prepend(gifDiv);
+            }
+          }
+        });
+    });
+///////////////////////////////////////////////////////////////////////////////////////////////
+//TO DO: when still gif is clicked, gif with class = "item" should toggle between a still to animate
+    $(".item").on("click", function() {
+      // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+      var state = $(this).attr("data-state");
+      // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+      // Then, set the image's data-state to animate
+      // Else set src to the data-still value
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+    });
+
+
+////////////////////////////////////////////////////////////////////
