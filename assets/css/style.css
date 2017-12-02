@@ -3,7 +3,7 @@ button, div, form, input {
 }
 body {
 background-image: url("../images/graf.jpg");
-background-size: cover;
+background-repeat: repeat-y;
 }
 label {
 	font-size: 36px;
