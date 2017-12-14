@@ -54,6 +54,8 @@ var APIKey = "dc6zaTOxFJmzC";
     //event handler isnt running once render buttons is ran
 
     $(document).on("click", ".band", function() {
+      //this will empty all the previously loaded gifs, so that we only see the ones for the currently clicked band
+      $("#bandsgifs-appear-here").empty();
       // In this case, the "this" keyword refers to the button that was clicked
       var band = $(this).attr("data-name");
 
